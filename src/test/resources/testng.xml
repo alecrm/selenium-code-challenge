@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <suite name = "Selenium Code Challenge">
-
+    <test name = "Login">
+        <classes>
+            <class name = "uitests.LoginTest"/>
+        </classes>
+    </test>
 </suite>
