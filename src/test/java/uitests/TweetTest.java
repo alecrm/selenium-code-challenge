@@ -3,8 +3,8 @@ package uitests;
 import org.alecrm.seleniumchallenge.drivers.DriverFactory;
 import org.alecrm.seleniumchallenge.models.User;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import steps.LoginSteps;
 import steps.TweetSteps;
@@ -17,7 +17,7 @@ public class TweetTest {
     private LoginSteps loginSteps;
     private final User user = new User("admin", "passw0rd");
 
-    @BeforeClass
+    @BeforeMethod
     public void setup() {
         driver = factory.createDriver();
         tweetSteps = new TweetSteps(driver);
@@ -26,7 +26,7 @@ public class TweetTest {
         loginSteps.loginUser(user);
     }
 
-    @AfterClass
+    @AfterMethod
     public void teardown() {
         factory.closeDriver(driver);
     }
@@ -38,7 +38,7 @@ public class TweetTest {
         String tweet = "This is a test tweet!";
 
         tweetSteps.publishTweet(tweet);
-        tweetSteps.confirmTweetExists(user, tweet);
+        tweetSteps.confirmTweetExists(user, tweet + "!");
     }
 
     @Test(
@@ -50,6 +50,18 @@ public class TweetTest {
         tweetSteps.publishTweet(tweet);
         tweetSteps.likeTweetByUser(user, tweet);
         tweetSteps.confirmNumberOfTweetLikes(user, tweet, 1);
+    }
+
+    @Test(
+            description = "Comments on a tweet and confirms the comment was published"
+    )
+    public void commentOnTweetTest() {
+        String tweet = "I hope someone comments on this!";
+        String comment = "Here you go, buddy. You seem lonely.";
+
+        tweetSteps.publishTweet(tweet);
+        tweetSteps.commentOnTweetByUser(user, tweet, comment);
+        tweetSteps.confirmCommentOnTweetByUser(user, tweet, user, comment);
     }
 
 }

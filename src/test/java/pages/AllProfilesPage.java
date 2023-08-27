@@ -2,6 +2,7 @@ package pages;
 
 import org.alecrm.seleniumchallenge.models.User;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -16,7 +17,11 @@ public class AllProfilesPage extends BasePage {
     }
 
     public Optional<WebElement> getProfile(User user) {
-        return Optional.of(driver.findElement(profileByUsername(user.getUsername())));
+        try {
+            return Optional.of(driver.findElement(profileByUsername(user.getUsername())));
+        } catch (NoSuchElementException e) {
+            return Optional.empty();
+        }
     }
 
     private By profileByUsername(String username) {

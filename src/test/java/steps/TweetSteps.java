@@ -1,6 +1,7 @@
 package steps;
 
 import modals.NewTweetModal;
+import modals.TweetModal;
 import org.alecrm.seleniumchallenge.models.User;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -34,5 +35,18 @@ public class TweetSteps extends BaseSteps {
         page.likeTweetByUser(user, tweet);
 
         Assert.assertEquals(page.getTweetByUserLikes(user, tweet), beforeLikes + 1);
+    }
+
+    public void commentOnTweetByUser(User user, String tweet, String comment) {
+        HomePage page = new HomePage(driver).openHomePage();
+        TweetModal modal = page.openTweetByUser(user, tweet);
+        modal.enterComment(comment);
+        modal.closeTweetModal();
+    }
+
+    public void confirmCommentOnTweetByUser(User tweetUser, String tweet, User commentUser, String comment) {
+        HomePage page = new HomePage(driver).openHomePage();
+        TweetModal modal = page.openTweetByUser(tweetUser, tweet);
+        Assert.assertTrue(modal.getCommentByUser(commentUser, comment).isPresent());
     }
 }
