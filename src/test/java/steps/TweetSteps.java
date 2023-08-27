@@ -22,4 +22,17 @@ public class TweetSteps extends BaseSteps {
         HomePage page = new HomePage(driver).openHomePage();
         Assert.assertTrue(page.getTweetByUser(user, tweet).isPresent());
     }
+
+    public void confirmNumberOfTweetLikes(User user, String tweet, int likes) {
+        HomePage page = new HomePage(driver).openHomePage();
+        Assert.assertEquals(page.getTweetByUserLikes(user, tweet), likes);
+    }
+
+    public void likeTweetByUser(User user, String tweet) {
+        HomePage page = new HomePage(driver).openHomePage();
+        int beforeLikes = page.getTweetByUserLikes(user, tweet);
+        page.likeTweetByUser(user, tweet);
+
+        Assert.assertEquals(page.getTweetByUserLikes(user, tweet), beforeLikes + 1);
+    }
 }
