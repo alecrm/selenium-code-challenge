@@ -3,7 +3,7 @@
 <suite name = "Selenium Code Challenge">
     <test name = "smoke">
         <classes>
-<!--            <class name = "uitests.LoginTest"/>-->
+            <class name = "uitests.LoginTest"/>
             <class name = "uitests.UserTest"/>
         </classes>
     </test>
