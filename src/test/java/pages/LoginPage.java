@@ -17,27 +17,24 @@ public class LoginPage extends BasePage {
         super(driver, "signin");
     }
 
-    private final String usernameLocator = "input[data-cy='signin-username-input']";
-    @FindBy(css = usernameLocator)
+    @FindBy(css = "input[data-cy='signin-username-input']")
     WebElement usernameElement;
 
-    private final String passwordLocator = "input[data-cy='signin-password-input']";
-    @FindBy(css = passwordLocator)
+    @FindBy(css = "input[data-cy='signin-password-input']")
     public WebElement passwordElement;
 
-    private final String loginButtonLocator = "button[data-cy='signin-button']";
-    @FindBy(css = loginButtonLocator)
+    @FindBy(css = "button[data-cy='signin-button']")
     public WebElement loginButtonElement;
 
     public LoginPage setUsername(String username) {
-        log.info("[LOGIN PAGE]: Entering the username [{}]", username);
+        log.info("[LOGIN PAGE]: Entering [{}] in the 'username' field", username);
         usernameElement.sendKeys(username);
 
         return this;
     }
 
     public LoginPage setPassword(String password) {
-        log.info("[LOGIN PAGE]: Entering the password [{}]", password);
+        log.info("[LOGIN PAGE]: Entering [{}] in the 'password' field", password);
         passwordElement.sendKeys(password);
 
         return this;

@@ -6,4 +6,9 @@
             <class name = "uitests.LoginTest"/>
         </classes>
     </test>
+    <test name = "User">
+        <classes>
+            <class name = "uitests.UserTest"/>
+        </classes>
+    </test>
 </suite>

@@ -20,7 +20,9 @@ public class LoginTest extends BaseTest {
         factory.closeDriver(driver);
     }
 
-    @Test
+    @Test(
+            description = "Enters login credentials and confirms the Home Page shows"
+    )
     public void loginTest() {
         String username = "admin";
         String password = "passw0rd"; // Most secure password ever

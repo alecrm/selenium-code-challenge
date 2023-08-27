@@ -31,7 +31,6 @@ public class DriverFactory {
     public DriverFactory() {
         log.trace("[DRIVER]: Detecting OS and setting webdriver path...");
         String os = System.getProperty("os.name");
-        System.out.println(os);
         String driverResourcePath = System.getProperty("user.dir") + "/src/main/resources/drivers";
         String webDriverPath;
 
