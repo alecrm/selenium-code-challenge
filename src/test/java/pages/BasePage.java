@@ -2,7 +2,9 @@ package pages;
 
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
+import modals.NewTweetModal;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -32,6 +34,9 @@ public class BasePage {
 
     @FindBy(css = "a[data-valuetext='Profile']")
     public WebElement myProfileButtonElement;
+
+    @FindBy(css = "button[class^='components']")
+    public WebElement tweetButtonElement;
     
     public AllProfilesPage clickAllProfiles() {
         log.info("[BASE PAGE]: Clicking the [All Profiles] button");
@@ -47,6 +52,17 @@ public class BasePage {
         userMenuButtonElement.click();
         myProfileButtonElement.click();
         return page;
+    }
+
+    public NewTweetModal openNewTweetModal() {
+        log.info("[BASE PAGE]: Opening the [New Tweet Modal]");
+        NewTweetModal modal = new NewTweetModal(driver);
+        tweetButtonElement.click();
+        if (modal.isOpen()) {
+            return modal;
+        } else {
+            throw new WebDriverException("[BASE PAGE]: An error occurred when opening the [New Tweet Modal]");
+        }
     }
 
     protected boolean isOpen() {
