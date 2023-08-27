@@ -3,8 +3,8 @@ package uitests;
 import org.alecrm.seleniumchallenge.drivers.DriverFactory;
 import org.alecrm.seleniumchallenge.models.User;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import steps.UserSteps;
 
@@ -14,13 +14,13 @@ public class UserTest {
     private WebDriver driver;
     UserSteps userSteps;
 
-    @BeforeClass
+    @BeforeMethod
     public void setup() {
         driver = factory.createDriver();
         userSteps = new UserSteps(driver);
     }
 
-    @AfterClass
+    @AfterMethod
     public void teardown() {
         factory.closeDriver(driver);
     }

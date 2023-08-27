@@ -45,15 +45,8 @@ public class TweetModal extends BaseModal {
 
     public void closeTweetModal() {
         driver.findElement(container).sendKeys(Keys.ESCAPE);
-        new WebDriverWait(driver, Duration.ofMillis(5000)).until(ExpectedConditions.urlToBe(new HomePage(driver).getPageURL()));
-    }
-
-    private final By tweetAuthorLocator = By.xpath(".//div[contains(@class,'UserInfo')]//a[contains(@class,'Username')]");
-    private final By tweetTextLocator = By.xpath(".//div[contains(@class,'TweetContent')]//p[contains(@class,'TweetText')]");
-    private final By inputCommentLocator = By.cssSelector("input");
-    private By commentByUserLocator(String username, String comment) {
-        return By.xpath(format(".//ul//span[normalize-space()='%s']//ancestor::li//p[normalize-space()='%s']",
-                               username.toLowerCase(), comment));
+        new WebDriverWait(driver, Duration.ofMillis(5000)).until(
+                ExpectedConditions.urlToBe(new HomePage(driver).getPageURL()));
     }
 
     @Override
@@ -63,6 +56,17 @@ public class TweetModal extends BaseModal {
                     tweet.equals(getTweetText());
         }
         return false;
+    }
+
+    private final By tweetAuthorLocator = By.xpath(
+            ".//div[contains(@class,'UserInfo')]//a[contains(@class,'Username')]");
+    private final By tweetTextLocator = By.xpath(
+            ".//div[contains(@class,'TweetContent')]//p[contains(@class,'TweetText')]");
+    private final By inputCommentLocator = By.cssSelector("input");
+
+    private By commentByUserLocator(String username, String comment) {
+        return By.xpath(format(".//ul//span[normalize-space()='%s']//ancestor::li//p[normalize-space()='%s']",
+                               username.toLowerCase(), comment));
     }
 
 }

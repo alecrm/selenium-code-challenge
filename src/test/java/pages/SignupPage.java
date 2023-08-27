@@ -15,7 +15,7 @@ public class SignupPage extends BasePage {
     public SignupPage(WebDriver driver) {
         super(driver, "signup");
     }
-    
+
     @FindBy(css = "input[data-cy='signup-name-input']")
     public WebElement nameElement;
 
@@ -33,7 +33,7 @@ public class SignupPage extends BasePage {
 
     @FindBy(css = "button[data-cy='signup-submit']")
     public WebElement signUpButtonElement;
-    
+
     public SignupPage enterName(String name) {
         log.info("[SIGNUP PAGE]: Entering [{}] in the 'name' field", name);
         nameElement.sendKeys(name);

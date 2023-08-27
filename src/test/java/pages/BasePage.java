@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import modals.NewTweetModal;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -40,7 +39,7 @@ public class BasePage {
 
     @FindBy(xpath = ".//a[normalize-space()='Home']")
     public WebElement homeButtonElement;
-    
+
     public AllProfilesPage clickAllProfiles() {
         log.info("[BASE PAGE]: Clicking the [All Profiles] button");
         AllProfilesPage page = new AllProfilesPage(driver);

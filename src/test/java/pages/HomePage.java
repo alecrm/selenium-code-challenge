@@ -58,12 +58,14 @@ public class HomePage extends BasePage {
     }
 
     private By tweetByUserLikesLocator(String username, String tweet) {
-        return By.xpath(format(".//span[normalize-space()='%s']//ancestor::li//p[normalize-space()='%s']//ancestor::div[contains(@class,'ListItemContent')]//button[span[contains(@class,'LikeIcon')]]",
-                               username.toLowerCase(), tweet));
+        return By.xpath(
+                format(".//span[normalize-space()='%s']//ancestor::li//p[normalize-space()='%s']//ancestor::div[contains(@class,'ListItemContent')]//button[span[contains(@class,'LikeIcon')]]",
+                       username.toLowerCase(), tweet));
     }
 
     private By tweetByUserOpenLocator(String username, String tweet) {
-        return By.xpath(format(".//span[normalize-space()='%s']//ancestor::li//p[normalize-space()='%s']//ancestor::div[contains(@class,'ListItemContent')]//button[*[name()='svg']]",
-                               username.toLowerCase(), tweet));
+        return By.xpath(
+                format(".//span[normalize-space()='%s']//ancestor::li//p[normalize-space()='%s']//ancestor::div[contains(@class,'ListItemContent')]//button[*[name()='svg']]",
+                       username.toLowerCase(), tweet));
     }
 }

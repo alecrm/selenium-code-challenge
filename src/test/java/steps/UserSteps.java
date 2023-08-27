@@ -1,6 +1,5 @@
 package steps;
 
-import com.beust.ah.A;
 import org.alecrm.seleniumchallenge.models.User;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
