@@ -5,6 +5,7 @@
         <classes>
             <class name = "uitests.LoginTest"/>
             <class name = "uitests.UserTest"/>
+            <class name = "uitests.TweetTest"/>
         </classes>
     </test>
 </suite>

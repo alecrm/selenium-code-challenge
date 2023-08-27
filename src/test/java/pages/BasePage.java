@@ -35,7 +35,7 @@ public class BasePage {
     @FindBy(css = "a[data-valuetext='Profile']")
     public WebElement myProfileButtonElement;
 
-    @FindBy(css = "button[class^='components']")
+    @FindBy(xpath = ".//button[normalize-space()='Tweet']")
     public WebElement tweetButtonElement;
 
     @FindBy(xpath = ".//a[normalize-space()='Home']")
@@ -69,11 +69,9 @@ public class BasePage {
         log.info("[BASE PAGE]: Opening the [New Tweet Modal]");
         NewTweetModal modal = new NewTweetModal(driver);
         tweetButtonElement.click();
-        if (modal.isOpen()) {
-            return modal;
-        } else {
-            throw new WebDriverException("[BASE PAGE]: An error occurred when opening the [New Tweet Modal]");
-        }
+        new WebDriverWait(driver, Duration.ofMillis(5000))
+                .until(ExpectedConditions.visibilityOf(driver.findElement(modal.getContainer())));
+        return modal;
     }
 
     protected boolean isOpen() {

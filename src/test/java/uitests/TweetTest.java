@@ -7,17 +7,23 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import steps.LoginSteps;
+import steps.TweetSteps;
 
-public class LoginTest {
+public class TweetTest {
 
     private final DriverFactory factory = new DriverFactory();
     private WebDriver driver;
+    private TweetSteps tweetSteps;
     private LoginSteps loginSteps;
+    private final User user = new User("admin", "passw0rd");
 
     @BeforeClass
     public void setup() {
         driver = factory.createDriver();
+        tweetSteps = new TweetSteps(driver);
         loginSteps = new LoginSteps(driver);
+
+        loginSteps.loginUser(user);
     }
 
     @AfterClass
@@ -26,13 +32,13 @@ public class LoginTest {
     }
 
     @Test(
-            description = "Enters login credentials and confirms the Home Page shows"
+            description = "Publishes a tweet and confirms it exists"
     )
-    public void loginTest() {
-        User user = new User("admin", "passw0rd");
+    public void publishTweetTest() {
+        String tweet = "This is a test tweet!";
 
-        loginSteps.loginUser(user);
-        loginSteps.confirmLoggedInUser(user);
+        tweetSteps.publishTweet(tweet);
+        tweetSteps.confirmTweetExists(user, tweet);
     }
 
 }
