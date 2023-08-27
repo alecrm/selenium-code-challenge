@@ -37,11 +37,22 @@ public class BasePage {
 
     @FindBy(css = "button[class^='components']")
     public WebElement tweetButtonElement;
+
+    @FindBy(xpath = ".//a[normalize-space()='Home']")
+    public WebElement homeButtonElement;
     
     public AllProfilesPage clickAllProfiles() {
         log.info("[BASE PAGE]: Clicking the [All Profiles] button");
         AllProfilesPage page = new AllProfilesPage(driver);
         allProfilesButtonElement.click();
+        new WebDriverWait(driver, Duration.ofMillis(5000)).until(ExpectedConditions.urlToBe(page.getPageURL()));
+        return page;
+    }
+
+    public HomePage openHomePage() {
+        log.info("[BASE PAGE]: Clicking the [Home] button");
+        HomePage page = new HomePage(driver);
+        homeButtonElement.click();
         new WebDriverWait(driver, Duration.ofMillis(5000)).until(ExpectedConditions.urlToBe(page.getPageURL()));
         return page;
     }
