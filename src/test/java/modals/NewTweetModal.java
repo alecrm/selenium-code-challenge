@@ -1,25 +1,15 @@
 package modals;
 
-import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 @Log4j2
-public class NewTweetModal {
+public class NewTweetModal extends BaseModal {
 
     public NewTweetModal(WebDriver driver) {
-        this.driver = driver;
-        this.container = By.cssSelector("div[aria-label='Compose new tweet']");
-    }
-
-    private final WebDriver driver;
-    @Getter
-    private final By container;
-
-    public boolean isOpen() {
-        return driver.findElement(container).isDisplayed();
+        super(driver, By.cssSelector("div[aria-label='Compose new tweet']"));
     }
 
     public NewTweetModal enterTweet(String tweet) {
