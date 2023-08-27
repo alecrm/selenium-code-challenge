@@ -41,4 +41,15 @@ public class TweetTest {
         tweetSteps.confirmTweetExists(user, tweet);
     }
 
+    @Test(
+            description = "Likes a tweet and confirms the like count raises by one"
+    )
+    public void likeTweetTest() {
+        String tweet = "I bet this will get exactly 1 like.";
+
+        tweetSteps.publishTweet(tweet);
+        tweetSteps.likeTweetByUser(user, tweet);
+        tweetSteps.confirmNumberOfTweetLikes(user, tweet, 1);
+    }
+
 }

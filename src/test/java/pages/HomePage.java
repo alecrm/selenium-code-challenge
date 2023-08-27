@@ -15,12 +15,25 @@ public class HomePage extends BasePage {
         super(driver, "");
     }
 
-    public Optional<WebElement> getTweetByUser(User user, String tweet) {
-        return Optional.of(driver.findElement(tweetByUser(user.getUsername(), tweet)));
+    public void likeTweetByUser(User user, String tweet) {
+        driver.findElement(tweetByUserLikesLocator(user.getUsername(), tweet)).click();
     }
 
-    private By tweetByUser(String username, String tweet) {
+    public Optional<WebElement> getTweetByUser(User user, String tweet) {
+        return Optional.of(driver.findElement(tweetByUserLocator(user.getUsername(), tweet)));
+    }
+
+    public int getTweetByUserLikes(User user, String tweet) {
+        return Integer.parseInt(driver.findElement(tweetByUserLikesLocator(user.getUsername(), tweet)).getText());
+    }
+
+    private By tweetByUserLocator(String username, String tweet) {
         return By.xpath(format(".//span[normalize-space()='%s']//ancestor::li//p[normalize-space()='%s']",
+                               username.toLowerCase(), tweet));
+    }
+
+    private By tweetByUserLikesLocator(String username, String tweet) {
+        return By.xpath(format(".//span[normalize-space()='%s']//ancestor::li//p[normalize-space()='%s']//ancestor::div[contains(@class,'ListItemContent')]//button[span[contains(@class,'LikeIcon')]]",
                                username.toLowerCase(), tweet));
     }
 }
