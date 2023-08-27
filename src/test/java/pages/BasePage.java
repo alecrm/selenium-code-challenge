@@ -2,7 +2,9 @@ package pages;
 
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
+import modals.NewTweetModal;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -32,11 +34,25 @@ public class BasePage {
 
     @FindBy(css = "a[data-valuetext='Profile']")
     public WebElement myProfileButtonElement;
+
+    @FindBy(xpath = ".//button[normalize-space()='Tweet']")
+    public WebElement tweetButtonElement;
+
+    @FindBy(xpath = ".//a[normalize-space()='Home']")
+    public WebElement homeButtonElement;
     
     public AllProfilesPage clickAllProfiles() {
         log.info("[BASE PAGE]: Clicking the [All Profiles] button");
         AllProfilesPage page = new AllProfilesPage(driver);
         allProfilesButtonElement.click();
+        new WebDriverWait(driver, Duration.ofMillis(5000)).until(ExpectedConditions.urlToBe(page.getPageURL()));
+        return page;
+    }
+
+    public HomePage openHomePage() {
+        log.info("[BASE PAGE]: Clicking the [Home] button");
+        HomePage page = new HomePage(driver);
+        homeButtonElement.click();
         new WebDriverWait(driver, Duration.ofMillis(5000)).until(ExpectedConditions.urlToBe(page.getPageURL()));
         return page;
     }
@@ -47,6 +63,15 @@ public class BasePage {
         userMenuButtonElement.click();
         myProfileButtonElement.click();
         return page;
+    }
+
+    public NewTweetModal openNewTweetModal() {
+        log.info("[BASE PAGE]: Opening the [New Tweet Modal]");
+        NewTweetModal modal = new NewTweetModal(driver);
+        tweetButtonElement.click();
+        new WebDriverWait(driver, Duration.ofMillis(5000))
+                .until(ExpectedConditions.visibilityOf(driver.findElement(modal.getContainer())));
+        return modal;
     }
 
     protected boolean isOpen() {

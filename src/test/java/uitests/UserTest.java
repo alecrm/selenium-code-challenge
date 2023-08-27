@@ -28,7 +28,7 @@ public class UserTest {
     @Test(
             description = "Creates a user and confirms the Home Screen shows after submitting info"
     )
-    public void createUser() {
+    public void createUserTest() {
         User user = new User("createUser2",
                              "createUser2",
                              "createUser2@email.com",
