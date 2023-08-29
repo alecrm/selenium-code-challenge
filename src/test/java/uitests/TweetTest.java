@@ -38,7 +38,7 @@ public class TweetTest {
         String tweet = "This is a test tweet!";
 
         tweetSteps.publishTweet(tweet);
-        tweetSteps.confirmTweetExists(user, tweet + "!");
+        tweetSteps.confirmTweetExists(user, tweet);
     }
 
     @Test(
